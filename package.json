@@ -1,0 +1,7 @@
+{
+  "name": "nsw",
+  "homepage": "https://github.com/bleonard252/NodeSnapWeb/",
+  "bugs" : { "url" : "https://github.com/owner/project/issues" },
+  "license" : "MIT",
+  "dependencies": { }
+}
