@@ -33,5 +33,4 @@ if (args[2] == "start") {
         response.statusCode = 200;
         response.end(data);
     }});
-  }
 }
