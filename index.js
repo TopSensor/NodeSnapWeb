@@ -34,4 +34,7 @@ if (cmd == "start") {
         response.statusCode = 200;
         response.end(data);
     }});})
+};
+if (cmd == "run") {
+  include(args.file);
 }
