@@ -1,0 +1,15 @@
+name: nsw
+version: git
+summary: Configurable webserver for snap
+description: >
+  Built with Ubuntu Core in mind.
+  NodeSnapWeb (nsw) allows you to start a node.js file with HTTP support (and maybe more in the future).
+  It may even allow you to run a headless server.
+confinement: strict
+parts:
+  wethr:
+    plugin: nodejs
+    source: .
+apps:
+  nsw:
+    command: nsw
