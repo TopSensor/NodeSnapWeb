@@ -2,9 +2,11 @@
   "name": "nsw",
   "version": "1.0.0",
   "homepage": "https://github.com/bleonard252/NodeSnapWeb/",
-  "bugs" : { "url" : "https://github.com/owner/project/issues" },
-  "license" : "MIT",
-  "dependencies": { 
-    "optimist": ""
+  "bugs": {
+    "url": "https://github.com/owner/project/issues"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "optimist": "^0.6.1"
   }
 }
