@@ -25,11 +25,11 @@ if (args[2] == "start") {
       if (err) {console.error(err);
       if (err.code == "ENOENT") { //404 Not Found
         response.statusCode = 404; 
-        response.end("404 Not Found")
+        response.end("404 Not Found");
       } else {
         response.statusCode = 500;
-        response.end("500 Internal Service Error (" + err.code + ')')
-      } else {
+        response.end("500 Internal Service Error (" + err.code + ')');
+      }} else {
         response.statusCode = 200;
         response.end(data);
     }});
