@@ -32,5 +32,5 @@ if (args[2] == "start") {
       }} else {
         response.statusCode = 200;
         response.end(data);
-    }});
+    }});})
 }
