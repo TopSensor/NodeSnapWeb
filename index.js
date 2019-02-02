@@ -3,17 +3,17 @@ var http = require("http");
 var https = require("https");
 var fs = require("fs");
 var url = require("url");
+var args = require("optimist").argv;
 
 //declarations
-var args = process.argv;
 var cmd = process.argv[2];
 
 //config
-var cfgport = (args["--port"] ? args["--port"] : 8080);
-var cfgroot = (args["--path"] ? args["--path"] : "/var/www/html");
+var cfgport = (args.port ? args.port : 8080);
+var cfgroot = (args.path ? args.path : "/var/www/html");
 
 //action checks
-if (args[2] == "start") {
+if (cmd == "start") {
   //runs from /var/www/html
   var server = http.createServer();
   server.listen(cfgport);
