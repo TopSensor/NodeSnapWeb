@@ -9,7 +9,7 @@ description: >
   and --file when using the run subcommand.
 confinement: strict
 parts:
-  wethr:
+  nsw:
     plugin: nodejs
     source: .
 apps:
