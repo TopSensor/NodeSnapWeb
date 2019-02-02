@@ -9,8 +9,8 @@ var args = process.argv;
 var cmd = process.argv[2];
 
 //config
-var cfgport = 80;
-var cfgroot = "/var/www/html"
+var cfgport = (args["--port"] ? args["--port"] : 8080);
+var cfgroot = (args["--path"] ? args["--path"] : "/var/www/html");
 
 //action checks
 if (args[2] == "start") {
