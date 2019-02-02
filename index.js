@@ -16,6 +16,7 @@ var cfgroot = "/var/www/html"
 if (args[2] == "start") {
   //runs from /var/www/html
   var server = http.createServer();
+  server.listen(cfgport);
   console.info("HTTP server created successfully at port "+cfgport+" with root dir "+cfgroot);
   server.on("request",function(request,response){
     let rqurl = url.parse(request.url);
