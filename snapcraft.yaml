@@ -5,6 +5,8 @@ description: >
   Built with Ubuntu Core in mind.
   NodeSnapWeb (nsw) allows you to start a node.js file with HTTP support (and maybe more in the future).
   It may even allow you to run a headless server.
+  Use the --port and --path options when using the start subcommand,
+  and --file when using the run subcommand.
 confinement: strict
 parts:
   wethr:
@@ -13,3 +15,5 @@ parts:
 apps:
   nsw:
     command: nsw
+    plugs:
+      - home
