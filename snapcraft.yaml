@@ -26,11 +26,17 @@ apps:
     command: node /snap/nsw/current/lib/node_modules/nsw/index.js
     plugs:
       - home
+      - network
+      - network-bind
   npm:
     command: npm
     plugs:
       - home
+      - network
+      - network-bind
   node:
     command: node
     plugs:
       - home
+      - network
+      - network-bind
