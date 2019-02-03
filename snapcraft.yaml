@@ -17,26 +17,11 @@ apps:
     command: node index.js
     plugs:
       - home
-      - removable_media
-      - personal_files
-      - system_files
-      - network
-      - network_bind
   npm:
     command: npm
     plugs:
       - home
-      - removable_media
-      - personal_files
-      - system_files
-      - network
-      - network_bind
   node:
     command: node
     plugs:
       - home
-      - removable_media
-      - personal_files
-      - system_files
-      - network
-      - network_bind
