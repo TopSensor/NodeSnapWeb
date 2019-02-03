@@ -11,9 +11,32 @@ confinement: strict
 parts:
   nsw:
     plugin: nodejs
-    source: .
+    source: https://github.com/bleonard252/NodeSnapWeb.git
 apps:
   nsw:
     command: node index.js
     plugs:
       - home
+      - removable_media
+      - personal_files
+      - system_files
+      - network
+      - network_bind
+  npm:
+    command: npm
+    plugs:
+      - home
+      - removable_media
+      - personal_files
+      - system_files
+      - network
+      - network_bind
+  node:
+    command: node
+    plugs:
+      - home
+      - removable_media
+      - personal_files
+      - system_files
+      - network
+      - network_bind
