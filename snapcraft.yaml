@@ -12,6 +12,15 @@ parts:
   nsw:
     plugin: nodejs
     source: https://github.com/bleonard252/NodeSnapWeb.git
+architecture:
+  - build-on: amd64
+    run-on: amd64
+  - build-on: armhf
+    run-on: armhf
+  - build-on: i386
+    run-on: i386
+  - build-on: arm64
+    run-on: arm64
 apps:
   nsw:
     command: node /snap/nsw/current/lib/node_modules/nsw/index.js
