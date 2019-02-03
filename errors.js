@@ -1,7 +1,7 @@
 //to use: var nsw_errors = require("./errors");
 var fs = require("fs");
 var util = require("util");
-export function handle(error, fullpath) {
+module.exports.handle = function (error, fullpath) {
   if (error.code == "EISDIR") {
       if (!util.types.isNativeError(fs.readFileSync(fullpath+"/index.html"))) return fs.readFileSync(fullpath+"/index.html");
       else if (!util.types.isNativeError(fs.readFileSync(fullpath+"/index.htm"))) return fs.readFileSync(fullpath+"/index.htm");
