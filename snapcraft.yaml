@@ -14,7 +14,7 @@ parts:
     source: https://github.com/bleonard252/NodeSnapWeb.git
 apps:
   nsw:
-    command: node index.js
+    command: bin/nsw
     plugs:
       - home
   npm:
