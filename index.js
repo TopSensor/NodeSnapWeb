@@ -4,6 +4,7 @@ var https = require("https");
 var fs = require("fs");
 var url = require("url");
 var args = require("optimist").argv;
+var nsw_errors = require("./errors");
 
 //declarations
 var cmd = process.argv[2];
@@ -25,11 +26,14 @@ if (cmd == "start") {
     fs.readFile(fullpath, (err, data) => {
       if (err) {console.error(err);
       if (err.code == "ENOENT") { //404 Not Found
-        response.statusCode = 404; 
-        response.end("404 Not Found");
-      } else {
-        response.statusCode = 500;
-        response.end("500 Internal Service Error (" + err.code + ')');
+        response.statusCode = 404;
+        response.end(nsw_errors.handle(err,fullpath));
+      } else if (err.code == "EISDIR") {
+        response.statusCode = 200;
+        response.end(nsw_errors.handle(err,fullpath));
+      } else if (err.code == "EPERM") {
+        response.statusCode = 401;
+        response.end(nsw_errors.handle(err,fullpath));
       }} else {
         response.statusCode = 200;
         response.end(data);
