@@ -4,7 +4,7 @@ var https = require("https");
 var fs = require("fs");
 var url = require("url");
 var args = require("optimist").argv;
-var nsw_errors = require("./errors");
+var nsw_errors = require("./mod/errors");
 
 //declarations
 var cmd = process.argv[2];
