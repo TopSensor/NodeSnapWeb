@@ -1,15 +1,22 @@
 //to use: var nsw_errors = require("./errors");
-var fs = require("fs");
-var util = require("util");
-module.exports.handle = function (error, fullpath) {
+const fs = require("fs");
+const fsPromises = require("fs").promises;
+const util = require("util");
+const indices = ["index.html", "index.htm", "index.md", "default.html", "default.htm", "default.md"];
+module.exports.handle = async function (error, fullpath) {
   if (error.code == "EISDIR") {
-      /*if (!util.types.isNativeError(fs.readFileSync(fullpath+"/index.html"))) return fs.readFileSync(fullpath+"/index.html");
-      else if (!util.types.isNativeError(fs.readFileSync(fullpath+"/index.htm"))) return fs.readFileSync(fullpath+"/index.htm");
-      else if (!util.types.isNativeError(fs.readFileSync(fullpath+"/default.html"))) return fs.readFileSync(fullpath+"/default.html");
-      else if (!util.types.isNativeError(fs.readFileSync(fullpath+"/default.htm"))) return fs.readFileSync(fullpath+"/default.htm");
-      else if (!util.types.isNativeError(fs.readFileSync(fullpath+"/.index.js"))) return include("./.index.js");
-      else if (!util.types.isNativeError(fs.readFileSync(fullpath+"/.index.js.js"))) return include("./.index.js.js");
-      else {*/
+    let indexdata = null;
+      indices.some(function(inde){
+        await fsPromises.readFile(fullpath+"/"+inde).then(function(dat){
+            indexdata = dat;
+        });
+        if (indexdata === null) {
+          return false;
+        } else {
+          return true;
+        }
+      });
+    if (indexdata === null) {
       let dir = fs.readdirSync(fullpath);
       let out = "<title>Directory index</title><h1>Directory index</h1><hr /><ul>";
       dir.forEach(function(dirent){
@@ -17,8 +24,10 @@ module.exports.handle = function (error, fullpath) {
       });
       out += `</ul><hr /><center>NodeSnapWeb (NSW); Running on ${process.arch} ${process.platform}; Node version ${process.version}; <br />
       Error code: EISDIR</center>`;
-      return out;
-    }//}
+      return out;}
+    else {
+      return indexdata;
+    }}
     else if (error.code == "ENOENT") {
         return `<title>404 Not Found</title><h2>404 Not Found</h2>
         The file or directory you requested could not be found. Please check the URL or try another name.
