@@ -5,7 +5,7 @@ const util = require("util");
 const indices = ["index.html", "index.htm", "index.md", "default.html", "default.htm", "default.md"];
 module.exports.handle = function (error, fullpath) {
   if (error.code == "EISDIR") {
-    let indexdata = null;
+    var indexdata = null;
       indices.some(function(inde){
         let x = fs.readFileSync(fullpath+"/"+inde);
         indexdata = x;
