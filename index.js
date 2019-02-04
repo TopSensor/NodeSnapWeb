@@ -29,9 +29,10 @@ if (cmd == "start") {
         response.statusCode = 404;
         response.end(nsw_errors.handle(err,fullpath));
       } else if (err.code == "EISDIR") {
-        if (rqurl.pathname.charAt(rqurl.pathname.length - 1) != "/") response.setHeader("Location",rqurl.pathname+"/");
+        if (rqurl.pathname.charAt(rqurl.pathname.length - 1) != "/") {response.setHeader("Location",rqurl.pathname+"/");response.statusCode = 301;}
+        else {
         response.statusCode = 200;
-        response.end(nsw_errors.handle(err,fullpath));
+        response.end(nsw_errors.handle(err,fullpath));}
       } else if (err.code == "EPERM") {
         response.statusCode = 401;
         response.end(nsw_errors.handle(err,fullpath));
