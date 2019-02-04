@@ -29,7 +29,7 @@ if (cmd == "start") {
         response.statusCode = 404;
         response.end(nsw_errors.handle(err,fullpath));
       } else if (err.code == "EISDIR") {
-        if (rqurl.pathname.charAt(rqurl.pathname.length - 1) != "/") {response.setHeader("Location",rqurl.pathname+"/");response.statusCode = 301;}
+        if (rqurl.pathname.charAt(rqurl.pathname.length - 1) != "/") {response.setHeader("Location",rqurl.pathname+"/");response.statusCode = 301;response.end()}
         else {
         response.statusCode = 200;
         response.end(nsw_errors.handle(err,fullpath));}
