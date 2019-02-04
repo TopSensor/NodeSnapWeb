@@ -12,7 +12,7 @@ module.exports.handle = function (error, fullpath) {
         if (indexdata === null) {
           return false;
         } else {
-          if (indexdata instanceof error) return false;
+          if (index.code != undefined) {indexdata = null; return false}
           else return true;
         }
       });
