@@ -12,7 +12,8 @@ mdx["x"] = require("marked-extras");
 
 //declarations
 var cmd = process.argv[2];
-mdex.init();
+mdx.x.init({});
+md.setOptions(mdx.x.markedDefaults);
 
 //config
 var cfgport = (args.port ? args.port : 8080);
@@ -51,5 +52,6 @@ if (cmd == "run") {
 }
 
 function amistad(data) {
-	var datus = md.parse(data);
+  var datus = md.parse(data);
+  datus = 
 }
