@@ -5,9 +5,14 @@ var fs = require("fs");
 var url = require("url");
 var args = require("optimist").argv;
 var nsw_errors = require("./mod/errors");
+var md = require("marked");
+var mdx = {};
+mdx["toc"] = require("marked-toc");
+mdx["x"] = require("marked-extras");
 
 //declarations
 var cmd = process.argv[2];
+mdex.init();
 
 //config
 var cfgport = (args.port ? args.port : 8080);
@@ -43,4 +48,8 @@ if (cmd == "start") {
 };
 if (cmd == "run") {
   include(args.file);
+}
+
+function amistad(data) {
+	var datus = md.parse(data);
 }
