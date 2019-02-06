@@ -6,7 +6,7 @@ var fsPromises = require("fs").promises;
 var url = require("url");
 var args = require("optimist").argv;
 var nsw_errors = require("./mod/errors");
-var md = require("remarkable");
+var _md = require("remarkable");
 var mdfm = require("front-matter");
 var mdx = {};
 
@@ -14,10 +14,12 @@ var mdx = {};
 var cmd = process.argv[2];
 
 //markdown parser
+var md = new _md();
 var mdi;
 for (mdi = 0; mdi < mdx.length; mdi++) {
   md.use(mdi[i]);
 };
+
 
 //config
 var cfgport = (args.port ? args.port : 8080);
