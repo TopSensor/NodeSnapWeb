@@ -35,7 +35,8 @@ if (cmd == "start") {
       if (err) {console.error(err);
       if (err.code == "ENOENT") { //404 Not Found
         response.statusCode = 404;
-        response.end(nsw_errors.handle(err,fullpath));
+        if (fullpath.endsWith('.html')) response.end(fs.readFileSync(fullpath.replace(/\.html$/,'.md')
+        else response.end(nsw_errors.handle(err,fullpath));
       } else if (err.code == "EISDIR") {
         if (rqurl.pathname.charAt(rqurl.pathname.length - 1) != "/") {response.setHeader("Location",rqurl.pathname+"/");response.statusCode = 301;response.end()}
         else {
@@ -46,7 +47,8 @@ if (cmd == "start") {
         response.end(nsw_errors.handle(err,fullpath));
       }} else {
         response.statusCode = 200;
-        response.end(data);
+        if (fullpath.endsWith('.md')) request.end(amistad(data));
+        else response.end(data);
     }});})
 };
 if (cmd == "run") {
