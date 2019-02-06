@@ -60,7 +60,7 @@ if (cmd == "run") {
 }
 
 function amistad(data) {
-  let out; let ssl = `<link rel='stylesheet' href="https://gistcdn.githack.com/bleonard252/3165615ff3d3c8275b33e5eed1841b0b/raw/github.css" from-fm-default>`;
+  let out; let ssl = `<link rel='stylesheet' href="https://gistcdn.githack.com/bleonard252/3165615ff3d3c8275b33e5eed1841b0b/raw/9dfcafeb5f2373fdb38eef16a32e0d50d6524183/github.css" from-fm-default>`;
   // toc // let datus = mdx.toc.insert(data);
   let front = mdfm(data);
   data = data.replace(/^---\n.*?\n---$/gm,'');
