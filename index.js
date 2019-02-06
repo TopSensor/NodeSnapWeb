@@ -49,7 +49,7 @@ if (cmd == "start") {
         response.end(nsw_errors.handle(err,fullpath));
       }} else {
         response.statusCode = 200;
-        if (fullpath.endsWith('.md')) request.end(amistad(data));
+        if (fullpath.endsWith('.md')) response.end(amistad(data));
         else response.end(data);
     }});})
 };
@@ -60,7 +60,7 @@ if (cmd == "run") {
 function amistad(data) {
   let out;
   // toc // let datus = mdx.toc.insert(data);
-  let front = mdfm(data);
+  let front = mdfm(data.toString());
   let datae = md.parse(data);
   out = datae;
   return `<!DOCTYPE HTML><head><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/styles/default.min.css"><script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/highlight.min.js"></script>
