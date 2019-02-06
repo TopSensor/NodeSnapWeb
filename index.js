@@ -39,7 +39,7 @@ if (cmd == "start") {
       if (err) {console.error(err);
       if (err.code == "ENOENT") { //404 Not Found
         response.statusCode = 404;
-        if (fullpath.endsWith('.html')) {try {let fi = fs.readFileSync(fullpath.replace(/\.html$/,'.md'));response.end(amistad(fi))} catch(e) {response.end(nsw_errors.handle(e,fullpath)}};
+        if (fullpath.endsWith('.html')) {try {let fi = fs.readFileSync(fullpath.replace(/\.html$/,'.md'));response.end(amistad(fi))} catch(e) {response.end(nsw_errors.handle(e,fullpath))}};
         else response.end(nsw_errors.handle(err,fullpath));
       } else if (err.code == "EISDIR") {
         if (rqurl.pathname.charAt(rqurl.pathname.length - 1) != "/") {response.setHeader("Location",rqurl.pathname+"/");response.statusCode = 301;response.end()}
