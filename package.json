@@ -9,8 +9,6 @@
   "license": "MIT",
   "dependencies": {
     "optimist": "^0.6.1",
-    "marked": "",
-    "marked-extras": "",
-    "marked-toc": ""
+    "remarkable": ""
   }
 }
