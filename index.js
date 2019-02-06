@@ -60,12 +60,13 @@ if (cmd == "run") {
 }
 
 function amistad(data) {
-  let out;
+  let out, us;
   // toc // let datus = mdx.toc.insert(data);
   let front = mdfm(data);
   data = data.replace(/^---\n.*?\n---$/gm,'');
   let datae = md.render(data);
+  if (front.attributes.stylesheet != undefined) us += `<link rel='stylesheet' href="${front.attributes.stylesheet}" from-front-matter>`;
   out = datae;
   return `<!DOCTYPE HTML><head><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/styles/default.min.css"><script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/highlight.min.js"></script>
-  <title>${front.attributes.title}</title><link rel='stylesheet' href="${front.attributes.stylesheet}" from-front-matter></head><body>` + datae + `</body>`
+  <title>${front.attributes.title}</title>${us}</head><body>` + datae + `</body>`
 }
