@@ -60,7 +60,7 @@ if (cmd == "run") {
 }
 
 function amistad(data) {
-  let out, us;
+  let out; let us;
   // toc // let datus = mdx.toc.insert(data);
   let front = mdfm(data);
   data = data.replace(/^---\n.*?\n---$/gm,'');
