@@ -7,6 +7,7 @@ var url = require("url");
 var args = require("optimist").argv;
 var nsw_errors = require("./mod/errors");
 var md = require("remarkable");
+var mdfm = require("front-matter");
 var mdx = {};
 
 //declarations
@@ -59,7 +60,7 @@ if (cmd == "run") {
 function amistad(data) {
   let out;
   // toc // let datus = mdx.toc.insert(data);
-  let front = mdx.fm(data);
+  let front = mdfm(data);
   let datae = md.parse(data);
   out = datae;
   return `<!DOCTYPE HTML><head><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/styles/default.min.css"><script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/highlight.min.js"></script>
