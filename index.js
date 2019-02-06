@@ -5,10 +5,8 @@ var fs = require("fs");
 var url = require("url");
 var args = require("optimist").argv;
 var nsw_errors = require("./mod/errors");
-var md = require("marked");
+var md = require("remarkable");
 var mdx = {};
-mdx["toc"] = require("marked-toc");
-mdx["x"] = require("marked-extras");
 
 //declarations
 var cmd = process.argv[2];
@@ -52,6 +50,10 @@ if (cmd == "run") {
 }
 
 function amistad(data) {
-  var datus = md.parse(data);
-  datus = 
+  let out;
+  // toc // let datus = mdx.toc.insert(data);
+  let front = mdx.fm(datus);
+  let datae = md.parse(datus);
+  out = `<head><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/styles/default.min.css"><script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/highlight.min.js"></script>
+  <title>${front.attributes.title}</title></head>` + datae
 }
