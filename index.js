@@ -59,8 +59,8 @@ if (cmd == "run") {
 function amistad(data) {
   let out;
   // toc // let datus = mdx.toc.insert(data);
-  let front = mdx.fm(datus);
-  let datae = md.parse(datus);
+  let front = mdx.fm(data);
+  let datae = md.parse(data);
   out = datae;
   return `<!DOCTYPE HTML><head><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/styles/default.min.css"><script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/highlight.min.js"></script>
   <title>${front.attributes.title}</title><link rel='stylesheet' href="${front.attributes.stylesheet}" from-front-matter></head><body>` + datae + `</body>`
