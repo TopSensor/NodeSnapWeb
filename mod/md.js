@@ -22,9 +22,9 @@ module.exports.amistad = function (data) {
   else if (front.attributes.style == "github") ssl = ssl;
   else if (front.attributes.style == "none") ssl = "<!-- none from-front-matter -->";
   if (front.attributes.stylesheet != undefined) ssl = `<link rel='stylesheet' href="${front.attributes.stylesheet}" from-front-matter>`;
-  out = datae;
+  if (front.attributes.style == "gitiles") datae = "<outerwrap><innerwrap>" + datae + "</innerwrap></outerwrap>"
   return `<!DOCTYPE HTML><head>
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/styles/default.min.css"><script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/highlight.min.js"></script><script>hljs.initHighlightingOnLoad();</script>
   <meta content="width=device-width,maximum-scale=1.0,initial-scale=1.0,minimum-scale=1.0,user-scalable=no" name="viewport">
-  <title>${front.attributes.title || "Untitled"}</title>${ssl}</head><body><article>` + datae + `</article></body>`
+  <title>${front.attributes.title || "Untitled"}</title>${ssl}</head><body>` + datae + `</body>`
 }
