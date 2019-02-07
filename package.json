@@ -11,6 +11,6 @@
     "optimist": "^0.6.1",
     "front-matter": "",
     "remarkable": "",
-    "remarkable-toc": ""
+    "markdown-toc": ""
   }
 }

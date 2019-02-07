@@ -1,6 +1,6 @@
 var _md = require("remarkable");
 var mdfm = require("front-matter");
-var toc = require("remarkable-toc");
+var toc = require("markdown-toc");
 var mdx = [];
 
 //markdown parser
