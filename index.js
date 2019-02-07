@@ -63,7 +63,7 @@ function amistad(data) {
   let out; let ssl = `<link rel='stylesheet' href="https://gistcdn.githack.com/bleonard252/3165615ff3d3c8275b33e5eed1841b0b/raw/9dfcafeb5f2373fdb38eef16a32e0d50d6524183/github.css" from-fm-default>`;
   // toc // let datus = mdx.toc.insert(data);
   let front = mdfm(data);
-  data = data.replace(/^---.*?---/gs,'');
+  data = data.replace(/^---[\s\S]*?---/g,'');
   let datae = md.render(data);
   if (front.attributes.style != undefined) ssl = `<link rel='stylesheet' href="https://gistcdn.githack.com/bleonard252/3165615ff3d3c8275b33e5eed1841b0b/raw/9dfcafeb5f2373fdb38eef16a32e0d50d6524183/${front.attributes.style}.css" from-fm-default>`;
   if (front.attributes.stylesheet != undefined) ssl = `<link rel='stylesheet' href="${front.attributes.stylesheet}" from-front-matter>`;
