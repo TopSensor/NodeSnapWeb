@@ -1,12 +1,13 @@
-//to use: var nsw_errors = require("./errors");
+//to use: var nsw_errors = require("./mod/errors");
 const fs = require("fs");
+const md = require("./md");
 const indices = ["index.html", "index.htm", "README.md", "readme.html", "readme.htm", "index.md", "default.html", "default.htm", "default.md"];
 module.exports.handle = function (error, fullpath) {
   if (error.code == "EISDIR") {
     var indexdata = null;
       indices.some(function(inde){
         try {let x = fs.readFileSync(fullpath+"/"+inde);
-        if (inde.endsWith(".md")) indexdata = require("../index").amistad(x); else indexdata = x;} catch(e) {return false;}
+        if (inde.endsWith(".md")) indexdata = md.amistad(x); else indexdata = x;} catch(e) {return false;}
       });
     if (indexdata === null) {
       let dir = fs.readdirSync(fullpath);
