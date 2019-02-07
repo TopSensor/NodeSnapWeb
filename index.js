@@ -71,3 +71,4 @@ function amistad(data) {
   return `<!DOCTYPE HTML><head><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/styles/default.min.css"><script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/highlight.min.js"></script><script>hljs.initHighlightingOnLoad();</script>
   <meta content="width=device-width,maximum-scale=1.0,initial-scale=1.0,minimum-scale=1.0,user-scalable=no" name="viewport"><title>${front.attributes.title || "Untitled"}</title>${ssl}</head><body>` + datae + `</body>`
 }
+module.exports.amistad = amistad;
