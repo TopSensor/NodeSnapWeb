@@ -18,7 +18,7 @@ module.exports.amistad = function (data) {
   data = data.replace(/^---[\s\S]*?---/g,'');
   data = toc.insert(data);
   let datae = md.render(data);
-       if (front.attributes.style == "gitiles") ssl = `<link rel='stylesheet' href="https://gistcdn.githack.com/bleonard252/3165615ff3d3c8275b33e5eed1841b0b/raw/79a3058c752cbc6844fedb20789feb813ce4f0f3/gitiles.css" from-fm-style>`;
+       if (front.attributes.style == "gitiles") ssl = `<link rel='stylesheet' href="https://gistcdn.githack.com/bleonard252/3165615ff3d3c8275b33e5eed1841b0b/raw/b21d9a025bddb7ab0d61169cafe564f517480dd9/gitiles.css" from-fm-style>`;
   else if (front.attributes.style == "github") ssl = ssl;
   else if (front.attributes.style == "none") ssl = "<!-- none from-front-matter -->";
   if (front.attributes.stylesheet != undefined) ssl = `<link rel='stylesheet' href="${front.attributes.stylesheet}" from-front-matter>`;
