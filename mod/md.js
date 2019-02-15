@@ -13,7 +13,7 @@ for (mdi = 0; mdi < mdx.length; mdi++) {
 };
 
 module.exports.amistad = function (data) {
-  let out; let pfx; var navbar;
+  let out; let pfx = ""; var navbar;
   let ssl = `<link rel='stylesheet' href="https://gistcdn.githack.com/bleonard252/3165615ff3d3c8275b33e5eed1841b0b/raw/9dfcafeb5f2373fdb38eef16a32e0d50d6524183/github.css" from-fm-default>`;
   // toc // let datus = mdx.toc.insert(data);
   let front = mdfm(data);
@@ -24,7 +24,7 @@ module.exports.amistad = function (data) {
   let datae = md.render(data);
        if (front.attributes.style == "gitiles") ssl = `<link rel='stylesheet' href="https://gistcdn.githack.com/bleonard252/3165615ff3d3c8275b33e5eed1841b0b/raw/2a83092c6aa56c7eda3fa22b712ee76c9a2e98ac/gitiles.css" from-fm-style>`;
   else if (front.attributes.style == "github") ssl = ssl;
-  else if (front.attributes.style == "none") ssl = "<!-- none from-front-matter -->";
+  else if (front.attributes.style == "none") ssl = "<!-- none from-fm-style -->";
   if (front.attributes.stylesheet != undefined) ssl = `<link rel='stylesheet' href="${front.attributes.stylesheet}" from-front-matter>`;
   if (front.attributes.style == "gitiles") {
     datae = "<outerwrap><innerwrap>" + datae + "</innerwrap></outerwrap>"; 
