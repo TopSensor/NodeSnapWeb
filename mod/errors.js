@@ -6,8 +6,8 @@ module.exports.handle = function (error, fullpath) {
   if (error.code == "EISDIR") {
     var indexdata = null;
       indices.some(function(inde){
-        try {let x = fs.readFileSync(fullpath+"/"+inde);
-        if (inde.endsWith(".md")) indexdata = md.amistad(x); else indexdata = x;} catch(e) {return false;}
+        try {let x = fs.readFileSync(fullpath+inde);
+        if (inde.endsWith(".md")) {indexdata = md.amistad(x + '');} else {indexdata = x;}} catch(e) {return false;}
       });
     if (indexdata === null) {
       let dir = fs.readdirSync(fullpath);
