@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "homepage": "https://github.com/bleonard252/NodeSnapWeb/",
   "bugs": {
-    "url": "https://github.com/owner/project/issues"
+    "url": "https://github.com/bleonard252/NodeSnapWeb/issues"
   },
   "bin": "./index.js",
   "license": "MIT",
@@ -11,6 +11,7 @@
     "optimist": "^0.6.1",
     "front-matter": "",
     "remarkable": "",
-    "markdown-toc": ""
+    "markdown-toc": "",
+    "mime-types": "2.1.23"
   }
 }

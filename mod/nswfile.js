@@ -4,14 +4,7 @@ const yml = require("js-yaml"); //this is a dependency of front-matter so it sho
 const fs = require("fs");
 
 module.exports = function() {
-	let defaults =
-	`site:
-		name: null
-	md:
-		style: github
-	listing: on
-	indexes: on
-	`
+	let defaults = fs.readFileSync(process.cwd()+'/nswdefaults.yaml') + "";
 	let changes = "";
 	try {changes = fs.readFileSync(cfgroot+"/.nsw");}
 	catch(e) {
@@ -19,5 +12,13 @@ module.exports = function() {
 		catch(f) {changes = "";}
 	}
 
-	nswcfg = yml.safeLoad(defaults + changes);
+	let defyml = yml.safeLoad(defaults.toString());
+	let chayml = yml.safeLoad(changes.toString());
+	for (var prop of defyml) {
+		if (chayml.hasOwnProperty(prop)) {
+			nswcfg[prop] = chayml[prop];
+		} else {
+			nswcfg[prop] = defyml[prop];
+		}
+	};
 }

@@ -47,8 +47,8 @@ if (cmd == "start") {
 				}
 			} else {
 				response.statusCode = 200;
-				if (fullpath.endsWith('.md')) response.end(md.amistad(data.toString()));
-				else response.end(data);
+				if (fullpath.endsWith('.md')) {response.setHeader('Content-Type', 'text/html');response.end(md.amistad(data.toString()));}
+				else {response.setHeader('Content-Type', fullpath || "*/*");response.end(data);}
 			}
 		});
 	})
