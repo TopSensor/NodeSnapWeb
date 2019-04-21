@@ -7,6 +7,7 @@ var url = require("url");
 var args = require("optimist").argv;
 var nsw_errors = require("./mod/errors");
 var md = require("./mod/md");
+var mime = require("mime-types");
 
 //declarations
 var cmd = process.argv[2];
@@ -48,7 +49,7 @@ if (cmd == "start") {
 			} else {
 				response.statusCode = 200;
 				if (fullpath.endsWith('.md')) {response.setHeader('Content-Type', 'text/html');response.end(md.amistad(data.toString()));}
-				else {response.setHeader('Content-Type', fullpath || "*/*");response.end(data);}
+				else {response.setHeader('Content-Type', mime.lookup(fullpath) || "*/*");response.end(data);}
 			}
 		});
 	})
