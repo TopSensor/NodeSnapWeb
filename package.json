@@ -12,6 +12,7 @@
     "front-matter": "",
     "remarkable": "",
     "markdown-toc": "",
-    "mime-types": "2.1.23"
+    "mime-types": "2.1.23",
+    "lodash.merge": ""
   }
 }

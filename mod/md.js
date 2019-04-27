@@ -3,6 +3,7 @@ var _md = require("remarkable");
 var mdfm = require("front-matter");
 var toc = require("markdown-toc");
 var mdx = [];
+var merge = require("lodash.merge");
 var opt = require("optimist").argv;
 
 //markdown parser
@@ -21,14 +22,16 @@ module.exports.amistad = function (data) {
 	data = data.replace(/^---[\s\S]*?---/g, '');
 	data = toc.insert(data);
 	let datae = md.render(data);
-	let root; console.log(nswcfg);
-	for (var prop of nswcfg.md) {
-		if (front.attributes.hasOwnProperty(prop)) {
-			root[prop] = front.attributes[prop];
-		} else {
-			root[prop] = nswcfg.md[prop];
-		}
-	};
+	var root = {}; console.log(nswcfg);
+	merge(root,nswcfg,front.attributes);
+	// for (prop in nswcfg.md) {
+	// 	if (front.attributes.hasOwnProperty(prop)) {
+	// 		root[prop] = front.attributes[prop];
+	// 	} else {
+	// 		root[prop] = nswcfg.md[prop];
+	// 	}
+	// };
+	console.debug(root);
 	/**/ if (root.style == "gitiles") ssl = `<link rel='stylesheet' href="https://gistcdn.githack.com/bleonard252/3165615ff3d3c8275b33e5eed1841b0b/raw/62335ca1d8d3bfc86f6a9ecf4618c6ebbb012240/gitiles.css" from-fm-style>`;
 	else if (root.style == "github") ssl = ssl;
 	else if (root.style == "none") ssl = "<!-- none from-fm-style -->";
