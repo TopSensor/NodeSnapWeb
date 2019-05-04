@@ -13,13 +13,13 @@ module.exports.handle = function (error, fullpath) {
     });
     if (indexdata === null) {
       let dir = fs.readdirSync(fullpath);
-      let out = "<title>Directory index</title><h1>Directory index</h1><hr /><ul>";
+      //let out = "<title>Directory index</title><h1>Directory index</h1><hr /><ul>";
+      let dsc = "<ul style='list-style-type:none'>";
       dir.forEach(function (dirent) {
-        out += "<li><a href=" + dirent + ">" + dirent + "</a></li>"
+        dsc += "<li><a href=" + dirent + ">" + dirent + "</a></li>"
       });
-      out += `</ul><hr /><center>NodeSnapWeb (NSW); Running on ${process.arch} ${process.platform}; Node version ${process.version}; <br />
-      Error code: 200/EISDIR</center>`;
-      return out;
+      dsc += `</ul>`;
+      return module.exports.parse(error,fullpath,{code: null, name: "Directory Index", desc: dsc});
     }
     else {
       return indexdata;
