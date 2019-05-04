@@ -49,6 +49,16 @@ module.exports.handle = function (error, fullpath) {
 
 module.exports.parse = (error, fullpath, objerr) => {
   let datat = "";
+  let datat2parser = (datat2) => {
+    datat2 = datat2.replaceAll("<!--%code-->",objerr.code.toString());
+    datat2 = datat2.replaceAll("<!--%name-->",objerr.name.toString());
+    datat2 = datat2.replaceAll("<!--%desc-->",objerr.desc.toString() || "");
+    datat2 = datat2.replaceAll("<!--%arch-->",process.arch.toString());
+    datat2 = datat2.replaceAll("<!--%plat-->",process.platform.toString());
+    datat2 = datat2.replaceAll("<!--%nver-->",process.version.toString());
+    datat2 = datat2.replaceAll("<!--%errc-->",error.code.toString());
+    return datat2;
+  };
   if (nswcfg.errors && nswcfg.errors[error.code]) {
     if (nswcfg.errors[error.code].startsWith("/")) datat = fs.readFileSync(nswcfg.errors[error.code]);
     else if ((error.code == "ENOENT") && (nswcfg.errors["404"]) && (nswcfg.errors["404"].startsWith("/"))) datat = fs.readFileSync(cfgroot + nswcfg.errors["404"]);
@@ -56,13 +66,7 @@ module.exports.parse = (error, fullpath, objerr) => {
     else if ((error.code == "EPERM") && (nswcfg.errors["401"]) && (nswcfg.errors["401"].startsWith("/"))) datat = fs.readFileSync(cfgroot + nswcfg.errors["401"]);
     else if ((error.code == "EPERM") && (nswcfg.errors["401"])) datat = nswcfg.errors["401"];
     else datat = nswcfg.errors[error.code];
-    datat = datat.replaceAll("<!--%code-->",objerr.code.toString());
-    datat = datat.replaceAll("<!--%name-->",objerr.name.toString());
-    datat = datat.replaceAll("<!--%desc-->",objerr.desc.toString() || "");
-    datat = datat.replaceAll("<!--%arch-->",process.arch.toString());
-    datat = datat.replaceAll("<!--%plat-->",process.platform.toString());
-    datat = datat.replaceAll("<!--%nver-->",process.version.toString());
-    datat = datat.replaceAll("<!--%errc-->",error.code.toString());
+    datat = datatparser(datat);
     if (nswcfg.errors[error.code].endsWith(".md")
     || (error.code == "ENOENT" && nswcfg.errors["404"].endsWith(".md"))
     || (error.code == "EPERM" && nswcfg.errors["401"].endsWith(".md"))) datat = md.amistad(datat);
@@ -70,13 +74,7 @@ module.exports.parse = (error, fullpath, objerr) => {
   } else if (nswcfg.errors && nswcfg.errors["base"]) {
     if (nswcfg.errors["base"].startsWith("/")) datat = fs.readFileSync(cfgroot + nswcfg.errors["base"]).toString();
     else datat = nswcfg.errors["base"];
-    datat = datat.replaceAll("<!--%code-->",objerr.code.toString());
-    datat = datat.replaceAll("<!--%name-->",objerr.name.toString());
-    datat = datat.replaceAll("<!--%desc-->",objerr.desc.toString() || "");
-    datat = datat.replaceAll("<!--%arch-->",process.arch.toString());
-    datat = datat.replaceAll("<!--%plat-->",process.platform.toString());
-    datat = datat.replaceAll("<!--%nver-->",process.version.toString());
-    datat = datat.replaceAll("<!--%errc-->",error.code.toString());
+    datat = datatparser(datat);
     if (nswcfg.errors["base"].endsWith(".md")) datat = md.amistad(datat);
     return datat;
   } else {
