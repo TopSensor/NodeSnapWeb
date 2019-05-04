@@ -17,7 +17,7 @@ module.exports = function() {
 
 	let defyml = yml.safeLoad(defaults.toString());
 	let chayml = yml.safeLoad(changes.toString());
-	console.log(defyml);
+	//console.log(defyml);
 	// for (prop in defyml) {
 	// 	if (chayml.hasOwnProperty(prop)) {
 	// 		nswcfg[prop] = chayml[prop];
@@ -27,7 +27,7 @@ module.exports = function() {
 	// };
 	//global['nswcfg'] = {...global['nswcfg'], ...defyml, ...chayml};
 	var defyml2 = JSON.parse(JSON.stringify(defyml));
-	console.debug(defyml2); console.debug(chayml);
+	//console.debug(defyml2); console.debug(chayml);
 	merge(defyml2,chayml);
 	console.debug(defyml2);
 	global['nswcfg'] = defyml2;
