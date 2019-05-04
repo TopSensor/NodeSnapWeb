@@ -4,5 +4,3 @@ md:
     style: github
 listing: true
 indexes: false
-errors:
-    base: null
