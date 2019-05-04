@@ -18,11 +18,11 @@ module.exports.amistad = function (data) {
 	let ssl = `<link rel='stylesheet' href="https://gistcdn.githack.com/bleonard252/3165615ff3d3c8275b33e5eed1841b0b/raw/9dfcafeb5f2373fdb38eef16a32e0d50d6524183/github.css" from-fm-default>`;
 	let front = mdfm(data);
 	try { navbar = (front.attributes.navbar ? fs.readFileSync(front.attributes.navbar) + '' : null) }
-	catch (e) { console.error(e); navbar = null; } console.debug(navbar); console.debug(md.render(navbar, {})); console.debug(md.render(navbar, {}).match(/<ul>(.*?)<\/ul>/));
+	catch (e) { console.error(e); navbar = null; } //console.debug(navbar); console.debug(md.render(navbar, {})); console.debug(md.render(navbar, {}).match(/<ul>(.*?)<\/ul>/));
 	data = data.replace(/^---[\s\S]*?---/g, '');
 	data = toc.insert(data);
 	let datae = md.render(data);
-	var root = {}; console.log(nswcfg);
+	var root = {}; //console.log(nswcfg);
 	merge(root,nswcfg,front.attributes);
 	// for (prop in nswcfg.md) {
 	// 	if (front.attributes.hasOwnProperty(prop)) {

@@ -30,13 +30,20 @@ if (cmd == "start") {
 	server.listen(cfgport);
 	console.info("HTTP server created successfully at port " + cfgport + " with root dir " + cfgroot);
 	server.on("request", function (request, response) {
-		let rqurl = url.parse(request.url);
+		response.setHeader("Server", "NodeSnapWeb/pre0.2");
+		let rqurl = url.parse("http://"+request.headers.host+request.url);
 		let fullpath = cfgroot + rqurl.pathname;
-		console.debug('User accessed ' + rqurl.pathname + "(" + fullpath + " on the system)");
-		fs.readFile(fullpath, (err, data) => {
+		console.debug('User accessed ' + rqurl.pathname + " (" + fullpath + " on the system)");
+		let hiddens = ["/.nsw", "/nsw.cfg", "/nsw-iso", "/."];
+		//console.debug(hiddens.filter((value) => rqurl.pathname.toString().includes(value)))
+		/*if (
+			(hiddens.filter(value => rqurl.pathname.toString().includes(value)) !== hiddens 
+				|| hiddens.filter(value => rqurl.pathname.toString().includes(value)) !== [] ) 
+			&& !rqurl.pathname.startsWith("/.well-known")) 
+			{ nswevents.emit("requesterror",new Error("Permission denied; dotfile or illegal user access detected").code = "EPERM",request,response); response.statusCode = 401; response.end(nsw_errors.handle({ code: "EPERM" }, fullpath)) }
+		else*/ fs.readFile(fullpath, (err, data) => {
 			if (err) {
 				nswevents.emit("requesterror",err,request,response);
-				console.error(err);
 				if (err.code == "ENOENT") { //404 Not Found
 					response.statusCode = 404;
 					if (fullpath.endsWith('.html')) { try { let fi = fs.readFileSync(fullpath.replace(/\.html$/, '.md')); response.end(md.amistad(fi.toString())) } catch (e) { response.end(nsw_errors.handle(e, fullpath)) } }
@@ -51,8 +58,10 @@ if (cmd == "start") {
 					response.statusCode = 401;
 					response.end(nsw_errors.handle(err, fullpath));
 				} else {
+					console.error(err);
 					nswevents.emit("unhandledrequesterror",err,request,response);
 				}
+				response.end();
 			} else {
 				response.statusCode = 200;
 				if (fullpath.endsWith('.md')) {
