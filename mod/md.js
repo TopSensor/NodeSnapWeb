@@ -32,7 +32,7 @@ module.exports.amistad = function (data) {
 	// 	}
 	// };
 	console.debug(root);
-	/**/ if (root.style == "gitiles") ssl = `<link rel='stylesheet' href="https://gistcdn.githack.com/bleonard252/3165615ff3d3c8275b33e5eed1841b0b/raw/62335ca1d8d3bfc86f6a9ecf4618c6ebbb012240/gitiles.css" from-fm-style>`;
+	/**/ if (root.style == "gitiles") ssl = `<link rel='stylesheet' href="https://gistcdn.githack.com/bleonard252/3165615ff3d3c8275b33e5eed1841b0b/raw/9b3022009b28d2a603fc4e340c931a82316d239b/gitiles.css" from-fm-style>`;
 	else if (root.style == "github") ssl = ssl;
 	else if (root.style == "none") ssl = "<!-- none from-fm-style -->";
 	if (root.stylesheet != undefined) ssl = `<link rel='stylesheet' href="${root.stylesheet}" from-front-matter>`;
