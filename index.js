@@ -10,7 +10,7 @@ var md = require("./mod/md");
 var mime = require("mime-types");
 const EventEmitter = require('events');
 String.prototype.replaceAll = function(search, replacement) {
-	var target = datat;
+	var target = this;
 	return target.split(search).join(replacement);
 };
 

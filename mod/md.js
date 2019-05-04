@@ -8,6 +8,7 @@ var opt = require("optimist").argv;
 
 //markdown parser
 var md = new _md();
+md.set({html:true});
 var mdi;
 for (mdi = 0; mdi < mdx.length; mdi++) {
 	md.use(mdi[i]);

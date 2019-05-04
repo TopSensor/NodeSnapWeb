@@ -49,14 +49,15 @@ module.exports.handle = function (error, fullpath) {
 
 module.exports.parse = (error, fullpath, objerr) => {
   let datat = "";
-  let datat2parser = (datat2) => {
-    datat2 = datat2.replaceAll("<!--%code-->",objerr.code.toString());
-    datat2 = datat2.replaceAll("<!--%name-->",objerr.name.toString());
-    datat2 = datat2.replaceAll("<!--%desc-->",objerr.desc.toString() || "");
+  let datatparser = (datat2) => {
+    if (!error.code == "EISDIR") datat2 = datat2.replaceAll("<!--%code-->",(objerr.code + '') || ""); 
+    else datat2 = datat2.replaceAll("<!--%code-->", "");
+    datat2 = datat2.replaceAll("<!--%name-->",(objerr.name + '') || "");
+    datat2 = datat2.replaceAll("<!--%desc-->",(objerr.desc + '') || "");
     datat2 = datat2.replaceAll("<!--%arch-->",process.arch.toString());
     datat2 = datat2.replaceAll("<!--%plat-->",process.platform.toString());
     datat2 = datat2.replaceAll("<!--%nver-->",process.version.toString());
-    datat2 = datat2.replaceAll("<!--%errc-->",error.code.toString());
+    datat2 = datat2.replaceAll("<!--%errc-->",error.code.toString() || "ENOERR");
     return datat2;
   };
   if (nswcfg.errors && nswcfg.errors[error.code]) {
