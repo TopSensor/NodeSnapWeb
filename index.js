@@ -8,6 +8,7 @@ var args = require("optimist").argv;
 var nsw_errors = require("./mod/errors");
 var md = require("./mod/md");
 var mime = require("mime-types");
+const EventEmitter = require('events');
 
 //declarations
 var cmd = process.argv[2];
@@ -19,6 +20,9 @@ global['cfgroot'] = (args.path ? args.path : (process.env.SNAP_USER_DATA ? proce
 	// fallback chain: --path > snap user data folder > /var/www/html
 global['nswcfg'] = {}; require("./mod/nswfile")(); //set config
 
+// Activate event listener
+global["nswevents"] = new EventEmitter();
+
 //action checks
 if (cmd == "start") {
 	//runs from /var/www/html
@@ -28,9 +32,10 @@ if (cmd == "start") {
 	server.on("request", function (request, response) {
 		let rqurl = url.parse(request.url);
 		let fullpath = cfgroot + rqurl.pathname;
-		console.log('User accessed ' + rqurl.pathname + "(" + fullpath + " on the system)");
+		console.debug('User accessed ' + rqurl.pathname + "(" + fullpath + " on the system)");
 		fs.readFile(fullpath, (err, data) => {
 			if (err) {
+				nswevents.emit("requesterror",err,request,response);
 				console.error(err);
 				if (err.code == "ENOENT") { //404 Not Found
 					response.statusCode = 404;
@@ -45,11 +50,20 @@ if (cmd == "start") {
 				} else if (err.code == "EPERM") {
 					response.statusCode = 401;
 					response.end(nsw_errors.handle(err, fullpath));
+				} else {
+					nswevents.emit("unhandledrequesterror",err,request,response);
 				}
 			} else {
 				response.statusCode = 200;
-				if (fullpath.endsWith('.md')) {response.setHeader('Content-Type', 'text/html');response.end(md.amistad(data.toString()));}
-				else {response.setHeader('Content-Type', mime.lookup(fullpath) || "*/*");response.end(data);}
+				if (fullpath.endsWith('.md')) {
+					nswevents.emit("mdrequest", request, response);
+					response.setHeader('Content-Type', 'text/html');
+					response.end(md.amistad(data.toString()));}
+				else {
+					nswevents.emit("request", request, response);
+					response.setHeader('Content-Type', mime.lookup(fullpath) || "*/*");
+					response.end(data);
+				}
 			}
 		});
 	})
