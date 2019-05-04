@@ -9,6 +9,10 @@ var nsw_errors = require("./mod/errors");
 var md = require("./mod/md");
 var mime = require("mime-types");
 const EventEmitter = require('events');
+String.prototype.replaceAll = function(search, replacement) {
+	var target = datat;
+	return target.split(search).join(replacement);
+};
 
 //declarations
 var cmd = process.argv[2];
@@ -33,6 +37,7 @@ if (cmd == "start") {
 		response.setHeader("Server", "NodeSnapWeb/pre0.2");
 		let rqurl = url.parse("http://"+request.headers.host+request.url);
 		let fullpath = cfgroot + rqurl.pathname;
+		//Object.defineProperty(fullpath, "non", {value:rqurl, readonly:true});
 		console.debug('User accessed ' + rqurl.pathname + " (" + fullpath + " on the system)");
 		let hiddens = ["/.nsw", "/nsw.cfg", "/nsw-iso", "/."];
 		//console.debug(hiddens.filter((value) => rqurl.pathname.toString().includes(value)))

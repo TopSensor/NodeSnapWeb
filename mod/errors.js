@@ -46,33 +46,38 @@ module.exports.handle = function (error, fullpath) {
     return module.exports.parse(error,fullpath,{code: 500, name: "Internal Server Error"})
   }
 };
+
 module.exports.parse = (error, fullpath, objerr) => {
+  let datat = "";
   if (nswcfg.errors && nswcfg.errors[error.code]) {
-    let datat = "";
     if (nswcfg.errors[error.code].startsWith("/")) datat = fs.readFileSync(nswcfg.errors[error.code]);
-    else if ((error.code == "ENOENT") && (nswcfg.errors["404"]) && (nswcfg.errors["404"].startsWith("/"))) datat = fs.readFileSync(nswcfg.errors["404"]);
+    else if ((error.code == "ENOENT") && (nswcfg.errors["404"]) && (nswcfg.errors["404"].startsWith("/"))) datat = fs.readFileSync(cfgroot + nswcfg.errors["404"]);
     else if ((error.code == "ENOENT") && (nswcfg.errors["404"])) datat = nswcfg.errors["404"];
-    else if ((error.code == "EPERM") && (nswcfg.errors["401"]) && (nswcfg.errors["401"].startsWith("/"))) datat = fs.readFileSync(nswcfg.errors["401"]);
+    else if ((error.code == "EPERM") && (nswcfg.errors["401"]) && (nswcfg.errors["401"].startsWith("/"))) datat = fs.readFileSync(cfgroot + nswcfg.errors["401"]);
     else if ((error.code == "EPERM") && (nswcfg.errors["401"])) datat = nswcfg.errors["401"];
     else datat = nswcfg.errors[error.code];
-    datat = datat.replace("<!--%code-->",objerr.code.toString());
-    datat = datat.replace("<!--%name-->",objerr.name.toString());
-    datat = datat.replace("<!--%desc-->",objerr.desc.toString() || "");
-    datat = datat.replace("<!--%arch-->",process.arch.toString());
-    datat = datat.replace("<!--%plat-->",process.platform.toString());
-    datat = datat.replace("<!--%nver-->",process.version.toString());
-    datat = datat.replace("<!--%errc-->",error.code.toString());
+    datat = datat.replaceAll("<!--%code-->",objerr.code.toString());
+    datat = datat.replaceAll("<!--%name-->",objerr.name.toString());
+    datat = datat.replaceAll("<!--%desc-->",objerr.desc.toString() || "");
+    datat = datat.replaceAll("<!--%arch-->",process.arch.toString());
+    datat = datat.replaceAll("<!--%plat-->",process.platform.toString());
+    datat = datat.replaceAll("<!--%nver-->",process.version.toString());
+    datat = datat.replaceAll("<!--%errc-->",error.code.toString());
+    if (nswcfg.errors[error.code].endsWith(".md")
+    || (error.code == "ENOENT" && nswcfg.errors["404"].endsWith(".md"))
+    || (error.code == "EPERM" && nswcfg.errors["401"].endsWith(".md"))) datat = md.amistad(datat);
     return datat;
   } else if (nswcfg.errors && nswcfg.errors["base"]) {
-    if (nswcfg.errors["base"].startsWith("/")) datat = fs.readFileSync(nswcfg.errors["base"]);
-    else datat = nswcfg.errors[error.code];
-    datat = datat.replace("<!--%code-->",objerr.code.toString());
-    datat = datat.replace("<!--%name-->",objerr.name.toString());
-    datat = datat.replace("<!--%desc-->",objerr.desc.toString() || "");
-    datat = datat.replace("<!--%arch-->",process.arch.toString());
-    datat = datat.replace("<!--%plat-->",process.platform.toString());
-    datat = datat.replace("<!--%nver-->",process.version.toString());
-    datat = datat.replace("<!--%errc-->",error.code.toString());
+    if (nswcfg.errors["base"].startsWith("/")) datat = fs.readFileSync(cfgroot + nswcfg.errors["base"]).toString();
+    else datat = nswcfg.errors["base"];
+    datat = datat.replaceAll("<!--%code-->",objerr.code.toString());
+    datat = datat.replaceAll("<!--%name-->",objerr.name.toString());
+    datat = datat.replaceAll("<!--%desc-->",objerr.desc.toString() || "");
+    datat = datat.replaceAll("<!--%arch-->",process.arch.toString());
+    datat = datat.replaceAll("<!--%plat-->",process.platform.toString());
+    datat = datat.replaceAll("<!--%nver-->",process.version.toString());
+    datat = datat.replaceAll("<!--%errc-->",error.code.toString());
+    if (nswcfg.errors["base"].endsWith(".md")) datat = md.amistad(datat);
     return datat;
   } else {
     return `<title>${objerr.code} ${objerr.name}</title><h2>${objerr.code} ${objerr.name}</h2>
