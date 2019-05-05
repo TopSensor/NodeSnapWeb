@@ -50,8 +50,8 @@ module.exports.handle = function (error, fullpath) {
 module.exports.parse = (error, fullpath, objerr) => {
   let datat = "";
   let datatparser = (datat2) => {
-    if (!error.code == "EISDIR") datat2 = datat2.replaceAll("<!--%code-->",(objerr.code + '') || ""); 
-    else datat2 = datat2.replaceAll("<!--%code-->", "");
+    if (error.code == "EISDIR") datat2 = datat2.replaceAll("<!--%code-->", "");
+    else datat2 = datat2.replaceAll("<!--%code-->",(objerr.code + '') || "");
     datat2 = datat2.replaceAll("<!--%name-->",(objerr.name + '') || "");
     datat2 = datat2.replaceAll("<!--%desc-->",(objerr.desc + '') || "");
     datat2 = datat2.replaceAll("<!--%arch-->",process.arch.toString());

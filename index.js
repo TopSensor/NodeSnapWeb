@@ -46,14 +46,19 @@ if (cmd == "start") {
 		let fullpath = cfgroot + rqurl.pathname;
 		//Object.defineProperty(fullpath, "non", {value:rqurl, readonly:true});
 		console.debug('User accessed ' + rqurl.pathname + " (" + fullpath + " on the system)");
+		console.debug(rqurl);
+		let nswrefresh = new Promise((resolve, reject) => {require("./mod/nswfile")();resolve()}).then(console.log('NSW refreshed!'));
 		let hiddens = ["/.nsw", "/nsw.cfg", "/nsw-iso", "/."];
 		//console.debug(hiddens.filter((value) => rqurl.pathname.toString().includes(value)))
-		/*if (
-			(hiddens.filter(value => rqurl.pathname.toString().includes(value)) !== hiddens 
-				|| hiddens.filter(value => rqurl.pathname.toString().includes(value)) !== [] ) 
-			&& !rqurl.pathname.startsWith("/.well-known")) 
-			{ nswevents.emit("requesterror",new Error("Permission denied; dotfile or illegal user access detected").code = "EPERM",request,response); response.statusCode = 401; response.end(nsw_errors.handle({ code: "EPERM" }, fullpath)) }
-		else*/ fs.readFile(fullpath, (err, data) => {
+		if (request.url.includes("/.") && !request.url.startsWith("/.well-known")) { //blocks all dotfiles except .well-known in the root
+			if (request.url == "/.nsw" || request.url == "/.nsw/") {
+					response.setHeader("Content-Type", "text/html");
+					response.statusCode = 503;
+					response.end(/*Temporary, remove when about page implemented:*/ nsw_errors.parse({code: "NSWABOUT"},null,{code: 503, name: "Maintenance", desc: "NodeSnapWeb About page coming soon!"}))
+				} //Non-overrideable NSW about page.
+				//TODO: add about page and use it above
+		else {nswevents.emit("requesterror", new Error("Permission denied; dotfile or illegal user access detected").code = "EPERM", request, response); response.statusCode = 401; response.end(nsw_errors.handle({ code: "EPERM" }, fullpath));}
+		} else fs.readFile(fullpath, (err, data) => {
 			if (err) {
 				nswevents.emit("requesterror",err,request,response);
 				if (err.code == "ENOENT") { //404 Not Found

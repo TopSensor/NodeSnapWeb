@@ -32,7 +32,7 @@ module.exports.amistad = function (data) {
 	// 		root[prop] = nswcfg.md[prop];
 	// 	}
 	// };
-	console.debug(root);
+	//console.debug(root);
 	/**/ if (root.style == "gitiles") ssl = `<link rel='stylesheet' href="https://gistcdn.githack.com/bleonard252/3165615ff3d3c8275b33e5eed1841b0b/raw/fcd1460b61497b866224822418b7de3927b85e90/gitiles.css" from-fm-style>`;
 	else if (root.style == "github") ssl = ssl;
 	else if (root.style == "none") ssl = "<!-- none from-fm-style -->";
