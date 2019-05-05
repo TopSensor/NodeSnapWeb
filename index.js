@@ -33,7 +33,6 @@ global['nswcfg'] = {}; require("./mod/nswfile")(); //set config
 // Activate event listener
 global["nswevents"] = new EventEmitter();
 
-
 //action checks
 if (cmd == "start") {
 	//runs from /var/www/html
@@ -47,10 +46,11 @@ if (cmd == "start") {
 		//Object.defineProperty(fullpath, "non", {value:rqurl, readonly:true});
 		console.debug('User accessed ' + rqurl.pathname + " (" + fullpath + " on the system)");
 		console.debug(rqurl);
-		let nswrefresh = new Promise((resolve, reject) => {require("./mod/nswfile")();resolve()}).then(console.log('NSW refreshed!'));
+		let nswrefresh = new Promise((resolve, reject) => {require("./mod/nswfile")(true);resolve()}).then(console.log('NSW refreshed!'));
 		let hiddens = ["/.nsw", "/nsw.cfg", "/nsw-iso", "/."];
 		//console.debug(hiddens.filter((value) => rqurl.pathname.toString().includes(value)))
-		if (request.url.includes("/.") && !request.url.startsWith("/.well-known")) { //blocks all dotfiles except .well-known in the root
+		if ((request.url.includes("/.") || request.url.startsWith("/nsw-iso")) 
+			&& !request.url.startsWith("/.well-known")) { //blocks all dotfiles except .well-known in the root
 			if (request.url == "/.nsw" || request.url == "/.nsw/") {
 					response.setHeader("Content-Type", "text/html");
 					response.statusCode = 503;
