@@ -8,7 +8,7 @@ module.exports = function () {
             plugdi = process.cwd() + "/plugins/" + plugdi;
             try {let me = require(plugdi)(); nswevents.emit("plugininstalled", plugdi, me);}
             catch(er){
-                console.error(er);
+                //console.error(er);
                 NPM.commands.install([plugdi], function() {let me = require(plugdi)(); nswevents.emit("plugininstalled", plugdi, me)})
         }}
     })
