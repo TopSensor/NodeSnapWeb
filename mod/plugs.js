@@ -3,8 +3,8 @@ const NPM = require("npm");
 module.exports = function () {
     var plugsdir = fs.readdirSync(process.cwd() + "/plugins");
     NPM.load({ loaded: false }, function () {
-        for (var plugdir in plugsdir) {
-            plugdi = plugsdir[plugdir];
+        for (plugdir of plugsdir) {
+            plugdi = plugdir;
             plugdi = process.cwd() + "/plugins/" + plugdi;
             try {let me = require(plugdi)(); nswevents.emit("plugininstalled", plugdi, me);}
             catch(er){
