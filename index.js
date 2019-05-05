@@ -18,8 +18,9 @@ String.prototype.replaceAll = function(search, replacement) {
 //declarations
 var cmd = process.argv[2];
 
-process.on('unhandledexception', (exception) => {
+process.on('uncaughtException', (exception, oog) => {
 	console.error(["Unhandled Exception caught in NodeSnapWeb", exception]);
+	debugger;
 })
 
 //config
