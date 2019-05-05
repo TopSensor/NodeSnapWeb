@@ -18,6 +18,10 @@ String.prototype.replaceAll = function(search, replacement) {
 //declarations
 var cmd = process.argv[2];
 
+process.on('unhandledexception', (exception) => {
+	console.error(["Unhandled Exception caught in NodeSnapWeb", exception]);
+})
+
 //config
 global['cfgport'] = (args.port ? args.port : 8080);
 	// fallback chain: --port > 8080
