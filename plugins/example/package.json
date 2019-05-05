@@ -1,0 +1,10 @@
+{
+    "name": "nsw-plugin-example",
+    "version": "1.0.0",
+    "homepage": "https://github.com/bleonard252/NodeSnapWeb/",
+    "bin": "./index.js",
+    "dependencies": {
+      "ask-sdk": ""
+    }
+  }
+  

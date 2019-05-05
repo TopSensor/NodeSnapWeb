@@ -8,6 +8,7 @@ var args = require("optimist").argv;
 var nsw_errors = require("./mod/errors");
 var md = require("./mod/md");
 var mime = require("mime-types");
+var plugz = require("./mod/plugs")();
 const EventEmitter = require('events');
 String.prototype.replaceAll = function(search, replacement) {
 	var target = this;
@@ -26,6 +27,7 @@ global['nswcfg'] = {}; require("./mod/nswfile")(); //set config
 
 // Activate event listener
 global["nswevents"] = new EventEmitter();
+
 
 //action checks
 if (cmd == "start") {

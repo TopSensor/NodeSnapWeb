@@ -13,6 +13,8 @@
     "remarkable": "",
     "markdown-toc": "",
     "mime-types": "2.1.23",
-    "lodash.merge": ""
+    "lodash.merge": "",
+    "npm": "",
+    "node": "^8.0.0"
   }
 }
