@@ -11,7 +11,8 @@ module.exports = function () {
                 //console.error(er);
                 console.log("Installing deps for " + plugdi);
                 try {
-                    NPM.commands.install([plugdi], function() {let me = require(plugdi)(); nswevents.emit("plugininstalled", plugdi, me)})
+                    NPM.commands.install([plugdi], function() {try{let me = require(plugdi)();}catch(ee){console.error("Unhandled Exception caught in Plugins module of NodeSnapWeb",ee)};
+                     nswevents.emit("plugininstalled", plugdi, me)})
                 } catch(ex) {
                     console.error("Unhandled Exception caught in Plugins module of NodeSnapWeb", ex)
                 }
