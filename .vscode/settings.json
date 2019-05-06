@@ -6,5 +6,8 @@
     },
     "debug.showInStatusBar": "never",
     "debug.internalConsoleOptions": "openOnSessionStart",
-    "debug.console.fontSize": 12
+    "debug.console.fontSize": 12,
+    "files.associations": {
+        "about.js": "javascriptreact"
+    }
 }
