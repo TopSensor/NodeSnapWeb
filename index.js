@@ -19,7 +19,8 @@ String.prototype.replaceAll = function(search, replacement) {
 var cmd = process.argv[2];
 
 process.on('uncaughtException', (exception, oog) => {
-	console.error(["Unhandled Exception caught in NodeSnapWeb", exception]);
+	console.error("%cUnhandled Exception caught in NodeSnapWeb", "color:red");
+	console.error("%c"+exception.stack.toString(), "color:amber");
 	debugger;
 })
 
@@ -32,6 +33,11 @@ global['nswcfg'] = {}; require("./mod/nswfile")(); //set config
 
 // Activate event listener
 global["nswevents"] = new EventEmitter();
+nswevents.on('error', (exception, oog) => {
+	console.error("%cUnhandled Exception caught in NodeSnapWeb during an %cEvent", "color:red", "color:blue", "%c"+exception.stack.toString(), "color:amber");
+	debugger;
+	stop();
+})
 
 //action checks
 if (cmd == "start") {

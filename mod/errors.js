@@ -39,6 +39,13 @@ module.exports.handle = function (error, fullpath) {
         Error code: 401/EPERM</center>`;*/
     return module.exports.parse(error,fullpath,{code: 401, name: "Unauthorized", desc: "You were not granted access to the page you were trying to get to."})
   }
+  else if (error.code == "EBADGW") {
+    /*return `<title>401 Unauthorized</title><h2>401 Unauthorized</h2>
+        You were not granted access to the page you were trying to get to.
+        <hr /><center>NodeSnapWeb (NSW); Running on ${process.arch} ${process.platform}; Node version ${process.version}; <br />
+        Error code: 401/EPERM</center>`;*/
+    return module.exports.parse(error,fullpath,{code: 501, name: "Bad Gateway", desc: "An error occurred in a script or program being used to serve content on this website."})
+  }//{code: 501, name: "Bad Gateway", desc: "An error occurred in a script or program being used to serve content on this website."}
   else {
     /*return `<title>500 Internal Server Error</title><h2>500 Internal Server Error</h2>
         <hr /><center>NodeSnapWeb (NSW); Running on ${process.arch} ${process.platform}; Node version ${process.version}; <br />
