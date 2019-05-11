@@ -9,6 +9,7 @@ var nsw_errors = require("./mod/errors");
 var md = require("./mod/md");
 var mime = require("mime-types");
 var plugz = require("./mod/plugs")();
+var aboutpg = require("./mod/about")
 const EventEmitter = require('events');
 String.prototype.replaceAll = function(search, replacement) {
 	var target = this;
@@ -59,8 +60,10 @@ if (cmd == "start") {
 			&& !request.url.startsWith("/.well-known")) { //blocks all dotfiles except .well-known in the root
 			if (request.url == "/.nsw" || request.url == "/.nsw/") {
 					response.setHeader("Content-Type", "text/html");
-					response.statusCode = 503;
-					response.end(/*Temporary, remove when about page implemented:*/ nsw_errors.parse({code: "NSWABOUT"},null,{code: 503, name: "Maintenance", desc: "NodeSnapWeb About page coming soon!"}))
+					//response.statusCode = 503;
+					//response.end(/*Temporary, remove when about page implemented:*/ nsw_errors.parse({code: "NSWABOUT"},null,{code: 503, name: "Maintenance", desc: "NodeSnapWeb About page coming soon!"}))
+					response.statusCode = 200;
+					response.end(aboutpg.doGet({request: request}));
 				} //Non-overrideable NSW about page.
 				//TODO: add about page and use it above
 		else {nswevents.emit("requesterror", new Error("Permission denied; dotfile or illegal user access detected").code = "EPERM", request, response); response.statusCode = 401; response.end(nsw_errors.handle({ code: "EPERM" }, fullpath));}

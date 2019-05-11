@@ -1,9 +1,10 @@
 var medicine;
 //#region
-var medicinebasic = (basic) => medicine = /*html*/`<!DOCTYPE html>
+var medicinebasic = (basic) => /*html*/`<!DOCTYPE html>
 <head>
     <title>About NodeSnapWeb</title>
     <link rel="stylesheet" href="https://teamfirework.github.io/endo/endo.css" /><!--TODO: add endo.css-->
+    <meta name="viewport" content="width:device-width">
     <style>
         :root {
             --endo-theme--primary: #ff3333;
@@ -17,6 +18,8 @@ var medicinebasic = (basic) => medicine = /*html*/`<!DOCTYPE html>
             background: #454545;
             background: var(--endo-theme--surface, #454545);
             color: #fff;
+            margin: 32px 128px;
+            height: 85vh;
         }
         div.nsw-surface .nsw-header {
             background: #ff3333;
@@ -27,13 +30,20 @@ var medicinebasic = (basic) => medicine = /*html*/`<!DOCTYPE html>
             font-weight: bold;
             margin:0;
         }
+        .nsw-content {
+            padding:16px;
+        }
     </style>
     <!--TODO: add endo customizations-->
 </head>
 <body>
     <div class="nsw-surface">
         <div class="nsw-header">About This NodeSnapWeb Server</div>
-        Yeti yeti yeti...
+        <div class="nsw-content">Yeti yeti yeti...</div>
     </div>
 </body>`;
 //#endregion
+
+module.exports.doGet = function (basictotal) {
+    return medicinebasic(basictotal);
+}
